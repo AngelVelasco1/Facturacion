@@ -1,59 +1,40 @@
 <div class="container my-5 rounded" style="--bs-bg-opacity: .4; border-style:groove;">
-    <div class="row cols-1 cols-sm-2 gy-2 py-4 mb-3 text-white fw-bold">
+    <div id="products" class="row cols-1 cols-sm-2 gy-2 py-4 mb-1 text-white fw-bold">
         <div class="col-md-12">
             <h2 class="text-center fw-bold">Invoice Details</h2>
         </div>
 
+        <div id="product_0" class="row align-items-center">
+            <div class="col-lg-2">
+                <label for="product_code" class="form-label">Product Code</label>
+                <input type="number" class="form-control" name="product_code" id="product_code" placeholder="code">
+            </div>
+            <div class="col-lg-3">
+                <label for="product_name" class="form-label">Product Name</label>
+                <input type="text" class="form-control" name="product_name" id="product_name"
+                    placeholder="Enter the product name">
+            </div>
+            <div class="col-lg-2">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="number" class="form-control" name="amount" id="amount" value="0" placeholder="0">
+            </div>
+            <div class="col-lg-2">
+                <label for="standard_value" class="form-label">Standard Value</label>
+                <input type="number" class="form-control" name="standard_value" id="standard_value" placeholder="0">
+            </div>
+
+            <div class="col-lg-3 m-auto text-center d-flex align-items-center">
+                <button data-row="product_0" class="btn btn-success px-5 py-3 m-0 "><i class="bi bi-plus-square-fill"></i></button>
+                <button  data-row="product_0" class="btn btn-danger px-5 py-3 mx-3"><i class="bi bi-dash-square-fill"></i></button>
+            </div>
+           
+        </div>
         <div class="row align-items-center">
-            <div class="col-lg-2">
-                <label for="product_code" class="form-label">Product Code</label>
-                <input type="number" class="form-control" name="product_code" id="product_code" placeholder="code">
-            </div>
-            <div class="col-lg-3">
-                <label for="product_name" class="form-label">Product Name</label>
-                <input type="text" class="form-control" name="product_name" id="product_name"
-                    placeholder="Enter the product name">
-            </div>
-            <div class="col-lg-2">
-                <label for="amount" class="form-label">Amount</label>
-                <input type="number" class="form-control" name="amount" id="amount" placeholder="0">
-            </div>
-            <div class="col-lg-2">
-                <label for="standard_value" class="form-label">Standard Value</label>
-                <input type="number" class="form-control" name="standard_value" id="standard_value" placeholder="0">
-            </div>
-
-            <div class="col-lg-3 m-auto text-center">
-                <button class="btn btn-success px-5 py-3 m-0 "><i class="bi bi-plus-square-fill"></i></button>
-                <button class="btn btn-danger px-5 py-3 mx-3"><i class="bi bi-dash-square-fill"></i></button>
+            <div class="col-lg-3 mt-4">
+                <button class="btn btn-primary px-4 py-3 mx-3">Add</button>
             </div>
            
         </div>
-        
-        <div class="row gy-2 align-items-center">
-            <div class="col-lg-2">
-                <label for="product_code" class="form-label">Product Code</label>
-                <input type="number" class="form-control" name="product_code" id="product_code" placeholder="code">
-            </div>
-            <div class="col-lg-3">
-                <label for="product_name" class="form-label">Product Name</label>
-                <input type="text" class="form-control" name="product_name" id="product_name"
-                    placeholder="Enter the product name">
-            </div>
-            <div class="col-lg-2">
-                <label for="amount" class="form-label">Amount</label>
-                <input type="number" class="form-control" name="amount" id="amount" placeholder="0">
-            </div>
-            <div class="col-lg-2">
-                <label for="standard_value" class="form-label">Standard Value</label>
-                <input type="number" class="form-control" name="standard_value" id="standard_value" placeholder="0">
-            </div>
-
-            <div class="col-lg-3 m-auto text-center align-middle ">
-                <button class="btn btn-success px-5 py-3 m-0"><i class="bi bi-plus-square-fill"></i></button>
-                <button class="btn btn-danger px-5 py-3 mx-3" ><i class="bi bi-dash-square-fill"></i></button>
-            </div>
-           
-        </div>
+       
     </div>
 </div>
