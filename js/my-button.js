@@ -10,11 +10,24 @@ export class Button extends HTMLElement {
         return await (await fetch('components/my-button.html')).text();
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         document.adoptedStyleSheets.push(styles);
-        this.components().then(html => {
-            this.innerHTML = html
-        })
+        await this.render();
+        this.addBtn.addEventListener('click', this.handleClick.bind(this))
+
     } 
-}
+
+    async render() {
+        let component = await this.components();
+        this.innerHTML = component;
+
+        this.products = this.querySelector('#products_container');
+        this.addBtn = this.querySelector('#add_btn');
+    }
+
+    handleClick() {
+        let newProduct = document.createElement('my-body');
+        this.products.insertAdjacentHTML('afterbegin', newProduct.outerHTML);
+    }
+ }
 customElements.define('my-button', Button);
