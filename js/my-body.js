@@ -12,19 +12,26 @@ export class Body extends HTMLElement {
     }
     selection(e) {
         let target = e.target;
-        if(target.nodeName == 'BUTTON') {
-            let allInputs = document.querySelectorAll(`#${$dataset.row} input`);
 
-            switch(target) {
+        if(target.nodeName == 'BUTTON') {
+            let eachBox = e.target.parentNode.parentNode;
+            let allInputs = eachBox.querySelectorAll(`input`);
+
+            switch(target.innerHTML) {
                 case "-":
                     allInputs.forEach(e => {
-                        
+                        (e.name == "amount" && e.value == 0) ? eachBox.parentNode.remove() : (e.name == "amount") ? e.value-- : e.value; 
                     })
+                    break;
+                case "+":
+                    allInputs.forEach(e => {
+                        (e.name == "amount") ? e.value++ : undefined;
+                    })
+                    break;
 
             }
         }
     }
-
     connectedCallback() {
         this.components().then(html => {
             this.innerHTML = html;
