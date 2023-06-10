@@ -10,10 +10,11 @@
     /* Singleton */
     trait Singleton {
         private static $instance;
-        private function __construct($args) {}
-        public static function getInstance(...$args) {
-
-            return self::$instance ??= new static (...$args);
+        private function __construct($arg) {}
+        public static function getInstance(...$arg) {
+            $args = func_get_args();
+            $arg = array_pop($args);
+            return self::$instance ??= new static (...$arg);
         }
 
         public function __set($name, $value) {
@@ -46,6 +47,7 @@
     function customerDetails($data) {}
     function sellerDetails($data) {}
     function productDetails($data) {}
+
     /* AutoLoad */
     function autoLoad($class) {
         $allDirectories = [
@@ -66,6 +68,5 @@
     /* Get Config (Instance) */
     $instance = Api::getInstance($allConfig);
     $res = $instance->handleRequest();
-
     echo json_encode($res);
 ?>
