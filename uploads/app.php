@@ -1,15 +1,18 @@
 <?php
     /* CONFIG */
     header("Content-Type: application/json; charset=UTF-8");
-    $_HEADER = apache_request_headers();
-    $_METHOD = $_SERVER['REQUEST_METHOD'];
-    $_DATA = json_decode(file_get_contents('php://input', true));
+    $allConfig = [
+        "_HEADER" => apache_request_headers(),
+        "_METHOD" => $_SERVER['REQUEST_METHOD'],
+        "_DATA " => json_decode(file_get_contents('php://input', true))
+    ];
 
     /* Singleton */
     trait Singleton {
         private static $instance;
         private function __construct($args) {}
         public static function getInstance(...$args) {
+
             return self::$instance ??= new static (...$args);
         }
 
@@ -20,7 +23,30 @@
             return $this->$name;
         }
     }
+    /* API */
+    class Api {
+        use Singleton;
+        private function __construct(private $_METHOD, private $_DATA){
+            $this->_METHOD = $_METHOD;
+            $this->DATA = $_DATA;
+        }
 
+        public function handleRequest() {
+            $checkMethod = match($this->METHOD) {
+                "POST" => $this->handlePostRequest(),
+                default => null
+            };
+            return $checkMethod;
+        }
+        private function handlePostRequest() {
+            return customerDetails($this->_DATA['customerDetails'] ?? null);
+        }
+
+    }
+    function customerDetails($data) {}
+    function sellerDetails($data) {}
+    function productDetails($data) {}
+    /* AutoLoad */
     function autoLoad($class) {
         $allDirectories = [
             dirname(__DIR__).'/scripts/db/',
@@ -32,10 +58,14 @@
 
         foreach ($allDirectories as $directory) {
             $file = $directory . $classFile;
-
-            return (file_exists($file)) ? require $file : null; 
-            
+            return (file_exists($file)) ? require $file : null;     
         }
     }
     spl_autoload_register('autoLoad');
+
+    /* Get Config (Instance) */
+    $instance = Api::getInstance($allConfig);
+    $res = $instance->handleRequest();
+
+    echo json_encode($res);
 ?>
