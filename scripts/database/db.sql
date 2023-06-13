@@ -1,10 +1,28 @@
--- Active: 1686323553532@@127.0.0.1@3306
-CREATE DATABASE Hunters_Bill;
-USE Hunters_Bill;
+CREATE DATABASE db_hunter_facture_Angel_Velasco;
+USE db_hunter_facture_Angel_Velasco;
+
+CREATE TABLE bill (
+    bill_number VARCHAR(25) NOT NULL PRIMARY KEY,
+    bill_date DATETIME NOT NULL DEFAULT NOW(),
+);
+
 CREATE TABLE customer (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
     fullName VARCHAR(255) NOT NULL,
     email VARCHAR(255),
     phone INT,
-    address VARCHAR(255)
-)
+    address VARCHAR(255),
+);
+
+CREATE TABLE products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_code BIGINT NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    amount INT NOT NULL,
+    standard_value INT NOT NULL
+);
+
+CREATE TABLE seller (
+    seller_id INT,
+   name VARCHAR(255) NOT NULL
+);
