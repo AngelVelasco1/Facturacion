@@ -3,7 +3,7 @@ USE db_hunter_facture_Angel_Velasco;
 
 CREATE TABLE bill (
     bill_number VARCHAR(25) NOT NULL PRIMARY KEY,
-    bill_date DATETIME NOT NULL DEFAULT NOW(),
+    bill_date DATETIME NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE customer (
@@ -23,6 +23,7 @@ CREATE TABLE products (
 );
 
 CREATE TABLE seller (
-    seller_id INT,
+seller_id INT,
    name VARCHAR(255) NOT NULL
 );
+ALTER TABLE bill ADD FOREIGN KEY (customer_id) REFERENCES customer(customer_id), ADD FOREIGN KEY (seller_id) REFERENCES seller(seller_id), ADD FOREIGN KEY (product_id) REFERENCES products(product_id);
