@@ -1,32 +1,18 @@
 <?php
-class Customer
+class Customer extends connection
 {
     use Singleton;
-
     public function __construct(
-        protected $id,
+        private $customer_id,
         public $fullName,
         public $email,
-        public $phone,
+        private $phone,
         private $address
-    ) {}
+    ) {
+        parent::__construct();
+    }
 
-    public function getId() {
-        return $this->id;
-    }
-    public function getfullName() {
-        return $this->fullName;
-    }
-    public function getEmail() {
-        return $this->email;
-    }
-    public function getPhone() {
-        return $this->phone;
-    }
-    public function getAddress() {
-        return $this->address;
-    }
-    
     
 }
+
 ?>

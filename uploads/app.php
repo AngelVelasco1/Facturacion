@@ -9,18 +9,18 @@
 
     /* Singleton */
     trait Singleton {
-        private static $instance;
-        private function __construct($arg) {}
+        public static $instance;
+        public function __construct($arg) {}
         public static function getInstance(...$arg) {
-            $args = func_get_args();
-            $arg = array_pop($args);
-            return self::$instance ??= new static (...$arg);
+            $arg = func_get_args();
+            $arg = array_pop($arg);
+            return (!(self::$instance instanceof self) || !empty($arg)) ? self::$instance = new static(...(array) $arg) : self::$instance;        
         }
 
-        public function __set($name, $value) {
+         function __set($name, $value) {
             $this->$name = $value;
         }
-        public function __get($name) {
+         function __get($name) {
             return $this->$name;
         }
     }
@@ -51,10 +51,11 @@
     /* AutoLoad */
     function autoLoad($class) {
         $allDirectories = [
-            dirname(__DIR__).'/scripts/db/',
+            dirname(__DIR__).'/scripts/database/',
+            dirname(__DIR__).'/scripts/bill/',
             dirname(__DIR__).'/scripts/seller/',
-            dirname(__DIR__).'/scripts/client/',
-            dirname(__DIR__).'/scripts/product/',
+            dirname(__DIR__).'/scripts/customer/',
+            dirname(__DIR__).'/scripts/products/',
         ];
         $classFile = str_replace('\\', '/', $class) . 'php';
 
@@ -65,8 +66,7 @@
     }
     spl_autoload_register('autoLoad');
 
-    /* Get Config (Instance) */
-    $instance = Api::getInstance($allConfig);
-    $res = $instance->handleRequest();
-    echo json_encode($res);
+    /* Get Customer Data */
+    Customer::getInstance(json_decode(file_get_contents('php://input'), true));
+  
 ?>
