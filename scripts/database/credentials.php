@@ -1,9 +1,9 @@
 <?php
  abstract class credentials {
-     protected $host = '172.16.48.210';
-     private $username = 'sputnik';
-     private $password = 'Sp3tn1kC@';
-     protected $database = 'db_hunter_facture_Angel_Velasco';
+     protected $host = '127.0.0.1';
+     private $user = 'root';
+     private $password = '';
+     protected $dbname = 'db_hunter_facture_Angel_Velasco';
     public function  __get($name) {
         return $this->{$name};
     }

@@ -1,8 +1,9 @@
--- Active: 1686658906641@@172.16.48.210@3306@db_hunter_facture_Angel_Velasco
+-- Active: 1687291608008@@127.0.0.1@3306
 CREATE DATABASE db_hunter_facture_Angel_Velasco;
 USE db_hunter_facture_Angel_Velasco;
 
 CREATE TABLE bill (
+  
     bill_number VARCHAR(25) NOT NULL PRIMARY KEY,
     bill_date DATETIME NOT NULL DEFAULT NOW()
 );
@@ -12,7 +13,7 @@ CREATE TABLE customer (
     fullName VARCHAR(255) NOT NULL,
     email VARCHAR(255),
     phone INT,
-    address VARCHAR(255),
+    address VARCHAR(255)
 );
 
 CREATE TABLE products (
@@ -24,17 +25,23 @@ CREATE TABLE products (
 );
 
 CREATE TABLE seller (
-seller_id INT,
+   seller_id INT,
    name VARCHAR(255) NOT NULL
 );
+ALTER TABLE bill ADD COLUMN customer_id INT;
+ALTER TABLE bill ADD COLUMN product_id INT;
+
+ALTER TABLE bill ADD COLUMN seller_id INT;
+ALTER TABLE seller ADD INDEX idx_seller_id (seller_id);
+
 ALTER TABLE bill 
 ADD FOREIGN KEY (customer_id) REFERENCES customer(customer_id), 
 ADD FOREIGN KEY (seller_id) REFERENCES seller(seller_id), 
 ADD FOREIGN KEY (product_id) REFERENCES products(product_id);
 
+
 INSERT INTO customer (customer_id, fullName, email, phone, address) VALUES (1, 'Maria', 'maria@gmail.com', '+57 3784574112', 'Street 5');
 SELECT fullName AS "Full's_Names" FROM customer;
-
 
 
 USE db_hunter_facture;
